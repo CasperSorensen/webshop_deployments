@@ -1,7 +1,7 @@
 version: "3.4"
 services:
   front_end:
-    build: ./FrontEnd
+    # build: ./FrontEnd
     image: knoxie2/front_end_app:latest
     restart: always
     ports:
@@ -12,7 +12,7 @@ services:
       - products_service
 
   orders_service:
-    build: ./OrdersApi
+    # build: ./OrdersApi
     image: knoxie2/orders_api:latest
     restart: always
     ports:
@@ -24,7 +24,7 @@ services:
       - orders_Db
 
   products_service:
-    build: ./ProductsApi
+    # build: ./ProductsApi
     image: knoxie2/products_api:latest
     restart: always
     ports:
