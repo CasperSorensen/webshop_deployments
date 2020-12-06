@@ -1,36 +1,39 @@
-version: "3"
-
+version: "3.4"
 services:
   front_end:
+    build: ./FrontEnd
     image: knoxie2/front_end_app_testing:latest
+    restart: always
     ports:
-      - 5001:5001
-    deploy:
-      replicas: 1
-      placement:
-        constraints: [node.role == staging]
+      - 5001:80
+      - 5002:443
+    depends_on:
+      - orders_service
+      - products_service
 
   orders_service:
+    build: ./OrdersApi
     image: knoxie2/orders_api_testing:latest
+    restart: always
     ports:
       - 5003:80
       - 5004:443
     environment:
       MongoDB__Host: orders_Db_testing
-    deploy:
-      placement:
-        constraints: [node.role == staging]
+    depends_on:
+      - orders_Db
 
   products_service:
-    image: knoxie2/products_api_testing:latest
+    build: ./ProductsApi
+    image: knoxie2/products_api_testting:latest
+    restart: always
     ports:
       - 5005:80
       - 5006:443
     environment:
       MongoDB__Host: products_Db_testing
-    deploy:
-      placement:
-        constraints: [node.role == staging]
+    depends_on:
+      - products_Db
 
   orders_Db_testing:
     image: mongo
@@ -42,9 +45,6 @@ services:
       - .orders_Db:/data/db
     ports:
       - 27017:27017
-    deploy:
-      placement:
-        constraints: [node.role == staging]
 
   products_Db_testing:
     image: mongo
@@ -57,6 +57,3 @@ services:
       - .products_Db:/data/db
     ports:
       - 27018:27018
-    deploy:
-      placement:
-        constraints: [node.role == staging]
