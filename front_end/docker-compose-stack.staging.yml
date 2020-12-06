@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+  front_end:
+    image: knoxie2/front_end_app_testing:latest
+    ports:
+      - 5001:5001
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == staging]
+
+  orders_service:
+    image: knoxie2/orders_api_testing:latest
+    ports:
+      - 5003:80
+      - 5004:443
+    environment:
+      MongoDB__Host: orders_Db_testing
+    deploy:
+      placement:
+        constraints: [node.role == staging]
+
+  products_service:
+    image: knoxie2/products_api_testing:latest
+    ports:
+      - 5005:80
+      - 5006:443
+    environment:
+      MongoDB__Host: products_Db_testing
+    deploy:
+      placement:
+        constraints: [node.role == staging]
+
+  orders_Db_testing:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - .orders_Db:/data/db
+    ports:
+      - 27017:27017
+    deploy:
+      placement:
+        constraints: [node.role == staging]
+
+  products_Db_testing:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    command: mongod --port 27018
+    volumes:
+      - .products_Db:/data/db
+    ports:
+      - 27018:27018
+    deploy:
+      placement:
+        constraints: [node.role == staging]
