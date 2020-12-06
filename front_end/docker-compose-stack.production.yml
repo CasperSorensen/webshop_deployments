@@ -7,8 +7,13 @@ services:
       - 5001:5001
     deploy:
       replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
       placement:
-        constraints: [node.role == production]
+        constraints: [node.label.env == production]
 
   orders_service:
     image: knoxie2/orders_api:latest
@@ -18,6 +23,12 @@ services:
     environment:
       MongoDB__Host: orders_Db
     deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
       placement:
         constraints: [node.role == production]
 
@@ -29,8 +40,14 @@ services:
     environment:
       MongoDB__Host: products_Db
     deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
       placement:
-        constraints: [node.role == production]
+        constraints: [node.label.env == production]
 
   orders_Db:
     image: mongo
@@ -43,8 +60,14 @@ services:
     ports:
       - 27017:27017
     deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
       placement:
-        constraints: [node.role == production]
+        constraints: [node.label.env == production]
 
   products_Db:
     image: mongo
@@ -58,5 +81,11 @@ services:
     ports:
       - 27018:27018
     deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
       placement:
-        constraints: [node.role == production]
+        constraints: [node.label.env == production]
