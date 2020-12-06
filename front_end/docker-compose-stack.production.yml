@@ -5,6 +5,8 @@ services:
     image: knoxie2/front_end_app:latest
     ports:
       - 5001:5001
+    networks:
+      - production
     deploy:
       replicas: 1
       update_config:
@@ -22,6 +24,8 @@ services:
       - 5004:443
     environment:
       MongoDB__Host: orders_Db
+    networks:
+      - production
     deploy:
       replicas: 1
       update_config:
@@ -37,6 +41,8 @@ services:
     ports:
       - 5005:80
       - 5006:443
+    networks:
+      - production
     environment:
       MongoDB__Host: products_Db
     deploy:
@@ -59,6 +65,8 @@ services:
       - .orders_Db:/data/db
     ports:
       - 27017:27017
+    networks:
+      - production
     deploy:
       replicas: 1
       update_config:
@@ -80,6 +88,8 @@ services:
       - .products_Db:/data/db
     ports:
       - 27018:27018
+    networks:
+      - production
     deploy:
       replicas: 1
       update_config:
@@ -89,3 +99,6 @@ services:
         condition: on-failure
       placement:
         constraints: [node.label.env == production]
+
+network:
+  production:
