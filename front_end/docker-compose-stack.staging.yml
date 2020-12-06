@@ -8,11 +8,11 @@ services:
       - 5001:80
       - 5002:443
     depends_on:
-      - orders_service
-      - products_service
+      - orders_service_testing
+      - products_service_testing
 
-  orders_service:
-    # build: ./OrdersApi
+  orders_service_testing:
+    #build: ./OrdersApi
     image: knoxie2/orders_api_testing:latest
     restart: always
     ports:
@@ -21,9 +21,9 @@ services:
     environment:
       MongoDB__Host: orders_Db_testing
     depends_on:
-      - orders_Db
+      - orders_Db_testing
 
-  products_service:
+  products_service_testing:
     # build: ./ProductsApi
     image: knoxie2/products_api_testting:latest
     restart: always
@@ -33,7 +33,7 @@ services:
     environment:
       MongoDB__Host: products_Db_testing
     depends_on:
-      - products_Db
+      - products_Db_testing
 
   orders_Db_testing:
     image: mongo
