@@ -1,53 +1,39 @@
-version: "3"
-
+version: "3.4"
 services:
   front_end:
+    build: ./FrontEnd
     image: knoxie2/front_end_app:latest
+    restart: always
     ports:
-      - 5001:5001
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints: [node.labels.env == production]
+      - 5001:80
+      - 5002:443
+    depends_on:
+      - orders_service
+      - products_service
 
   orders_service:
+    build: ./OrdersApi
     image: knoxie2/orders_api:latest
+    restart: always
     ports:
       - 5003:80
       - 5004:443
     environment:
       MongoDB__Host: orders_Db
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints: [node.labels.env == production]
+    depends_on:
+      - orders_Db
 
   products_service:
+    build: ./ProductsApi
     image: knoxie2/products_api:latest
+    restart: always
     ports:
       - 5005:80
       - 5006:443
     environment:
       MongoDB__Host: products_Db
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints: [node.labels.env == production]
+    depends_on:
+      - products_Db
 
   orders_Db:
     image: mongo
@@ -59,15 +45,6 @@ services:
       - .orders_Db:/data/db
     ports:
       - 27017:27017
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints: [node.labels.env == production]
 
   products_Db:
     image: mongo
@@ -80,12 +57,3 @@ services:
       - .products_Db:/data/db
     ports:
       - 27018:27018
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-      placement:
-        constraints: [node.labels.env == production]
