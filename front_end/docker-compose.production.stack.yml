@@ -13,7 +13,7 @@ services:
       restart_policy:
         condition: on-failure
       placement:
-        constraints: [node.label.env == production]
+        constraints: [node.labels.env == production]
 
   orders_service:
     image: knoxie2/orders_api:latest
@@ -30,7 +30,7 @@ services:
       restart_policy:
         condition: on-failure
       placement:
-        constraints: [node.role == production]
+        constraints: [node.labels.env == production]
 
   products_service:
     image: knoxie2/products_api:latest
@@ -47,7 +47,7 @@ services:
       restart_policy:
         condition: on-failure
       placement:
-        constraints: [node.label.env == production]
+        constraints: [node.labels.env == production]
 
   orders_Db:
     image: mongo
@@ -67,7 +67,7 @@ services:
       restart_policy:
         condition: on-failure
       placement:
-        constraints: [node.label.env == production]
+        constraints: [node.labels.env == production]
 
   products_Db:
     image: mongo
@@ -88,4 +88,4 @@ services:
       restart_policy:
         condition: on-failure
       placement:
-        constraints: [node.label.env == production]
+        constraints: [node.labels.env == production]
