@@ -20,6 +20,7 @@ services:
     ports:
       - 5003:80
       - 5004:443
+      - 9300:9200
     environment:
       MongoDB__Host: orders_Db_testing
     deploy:
