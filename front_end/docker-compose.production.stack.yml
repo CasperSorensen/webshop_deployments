@@ -56,7 +56,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-      - .orders_Db:/data/db
+      - .~/orders_Db:/data/db
     ports:
       - 27017:27017
     deploy:
