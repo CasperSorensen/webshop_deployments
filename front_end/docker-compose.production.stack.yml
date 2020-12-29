@@ -56,10 +56,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    command: mongod --port 27019
     volumes:
       - ./orders_Db:/data/db
     ports:
-      - 27017:27017
+      - 27019:27019
     deploy:
       replicas: 1
       update_config:
