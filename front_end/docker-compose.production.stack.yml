@@ -58,7 +58,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     command: mongod --port 27019
     volumes:
-      - ./orders_Db:/data/db
+      - .orders_Db:/data/db
     ports:
       - 27019:27019
     deploy:
