@@ -36,7 +36,7 @@ services:
   products_service:
     image: knoxie2/products_api:latest
     ports:
-      - 5005:80
+      - 5005:5001
       - 5006:443
     environment:
       MongoDB__Host: products_Db
