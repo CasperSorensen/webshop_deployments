@@ -18,7 +18,7 @@ services:
   orders_service:
     image: knoxie2/orders_api:latest
     ports:
-      - 5003:80
+      - 5003:5001
       - 5004:443
       - 9300:9200
     environment:
