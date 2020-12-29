@@ -15,7 +15,7 @@ services:
       placement:
         constraints: [node.labels.env == staging]
 
-  orders_service:
+  orders_service_testing:
     image: knoxie2/orders_api_testing:latest
     ports:
       - 5008:5001
@@ -32,7 +32,7 @@ services:
       placement:
         constraints: [node.labels.env == staging]
 
-  products_service:
+  products_service_testing:
     image: knoxie2/products_api_testing:latest
     ports:
       - 5010:5001
