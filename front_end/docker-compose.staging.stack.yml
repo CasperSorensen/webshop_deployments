@@ -4,7 +4,7 @@ services:
   front_end:
     image: knoxie2/front_end_app_testing:latest
     ports:
-      - 5001:5001
+      - 5007:5001
     deploy:
       replicas: 1
       update_config:
@@ -18,8 +18,8 @@ services:
   orders_service:
     image: knoxie2/orders_api_testing:latest
     ports:
-      - 5003:5001
-      - 5004:443
+      - 5008:5001
+      - 5009:443
       - 9300:9200
     environment:
       MongoDB__Host: orders_Db_testing
@@ -36,8 +36,8 @@ services:
   products_service:
     image: knoxie2/products_api_testing:latest
     ports:
-      - 5005:5001
-      - 5006:443
+      - 5010:5001
+      - 5011:443
     environment:
       MongoDB__Host: products_Db_testing
     deploy:
