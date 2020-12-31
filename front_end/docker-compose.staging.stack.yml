@@ -2,7 +2,7 @@ version: "3"
 
 services:
   front_end:
-    image: knoxie2/front_end_app_testing:latest
+    image: knoxie2/front_end_app_testing
     ports:
       - 5007:5001
     deploy:
@@ -16,7 +16,7 @@ services:
         constraints: [node.labels.env == staging]
 
   orders_service_testing:
-    image: knoxie2/orders_api_testing:latest
+    image: knoxie2/orders_api_testing
     ports:
       - 5008:5001
       - 5009:443
@@ -34,7 +34,7 @@ services:
         constraints: [node.labels.env == staging]
 
   products_service_testing:
-    image: knoxie2/products_api_testing:latest
+    image: knoxie2/products_api_testing
     ports:
       - 5010:5001
       - 5011:443
