@@ -22,7 +22,7 @@ services:
       - 5009:443
     environment:
       MongoDB__Host: orders_Db_testing
-      ASPNETCORE_ENVIRONMENT: Staging
+      ASPNETCORE_ENVIRONMENT: Development
     deploy:
       replicas: 1
       update_config:
@@ -40,7 +40,7 @@ services:
       - 5011:443
     environment:
       MongoDB__Host: products_Db_testing
-      ASPNETCORE_ENVIRONMENT: Staging
+      ASPNETCORE_ENVIRONMENT: Development
     deploy:
       replicas: 1
       update_config:
