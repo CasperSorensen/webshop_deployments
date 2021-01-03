@@ -5,6 +5,8 @@ services:
     image: knoxie2/front_end_app_testing
     ports:
       - 5007:5001
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
     deploy:
       replicas: 1
       update_config:
