@@ -2,7 +2,7 @@ version: "3"
 
 services:
   front_end:
-    image: knoxie2/front_end_app_testing
+    image: knoxie2/front_end_app_testing:latest
     ports:
       - 5007:5001
     environment:
