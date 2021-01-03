@@ -5,6 +5,9 @@ services:
     image: knoxie2/front_end_app
     ports:
       - 5001:5001
+    environment:
+      PRODUCTS_API_URL: http://13.49.179.12:5005/products
+      ORDERS_API_URL: http://13.49.179.12:5003/orders
     deploy:
       replicas: 1
       update_config:
