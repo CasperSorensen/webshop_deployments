@@ -7,6 +7,8 @@ services:
       - 5007:5001
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      PRODUCTS_API_URL: http://13.49.100.19:5010/products
+      ORDERS_API_URL: http://13.49.100.19:5008/orders
     deploy:
       replicas: 1
       update_config:
