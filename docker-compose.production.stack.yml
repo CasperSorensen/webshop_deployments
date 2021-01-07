@@ -6,7 +6,6 @@ services:
     ports:
       - 5001:5001
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
       PRODUCTS_API_URL: http://13.49.179.12:5005/products
       ORDERS_API_URL: http://13.49.179.12:5003/orders
     deploy:
@@ -26,7 +25,6 @@ services:
       - 5004:443
       - 9300:9200
     environment:
-      ASPNETCORE_ENVIRONMENT: Staging
       MongoDB__Host: orders_Db
     deploy:
       replicas: 1
@@ -44,7 +42,6 @@ services:
       - 5005:5001
       - 5006:443
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
       MongoDB__Host: products_Db
     deploy:
       replicas: 1
