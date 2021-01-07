@@ -26,6 +26,7 @@ services:
       - 5004:443
       - 9300:9200
     environment:
+      ASPNETCORE_ENVIRONMENT: Production
       MongoDB__Host: orders_Db
     deploy:
       replicas: 1
@@ -43,6 +44,7 @@ services:
       - 5005:5001
       - 5006:443
     environment:
+      ASPNETCORE_ENVIRONMENT: Production
       MongoDB__Host: products_Db
     deploy:
       replicas: 1
